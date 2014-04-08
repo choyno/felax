@@ -1,0 +1,46 @@
+
+<%= grid(@events_grid) do |g|
+  
+  g.column name: 'Event Date', attribute: 'starts_at'
+   
+  g.column name: 'Customer', model: 'Customer', attribute: 'last_name' do |event|
+    link_to(event.customer.last_name, event.customer) if event.customer
+  end
+  g.column name: 'Therapist', model: 'Therapist', attribute: 'nick_name', custom_filter: :auto do |event|
+    event.therapist.nick_name if event.therapist
+  end
+  
+  g.column name: 'Location', model: 'Location', attribute: 'name', custom_filter: :auto do |event|
+    event.location.name if event.location
+  end
+    g.column name: 'Room', model: 'Room', attribute: 'name', custom_filter: :auto do |event|
+    event.room.name if event.room
+  end
+    g.column name: 'Service', model: 'Service', attribute: 'name', custom_filter: :auto do |event|
+    event.service.name if event.service
+  end
+  
+   g.column name: 'Walk-In?', attribute: 'walkin' do |event|  
+    if event.walkin
+    	[(event.walkin? ? 'Walk-In' : 'Scheduled'), {style: 'background-color: rgb(255,102,104);'}]
+    else
+    	event.walkin? ? 'Walk-In' : 'Scheduled'
+    end
+   end
+   
+   g.column name: 'Cancelled?', attribute: 'cancel'  do |event|  
+    if event.cancel
+    	[(event.cancel? ? 'Cancelled' : 'Scheduled'), {style: 'background-color: rgb(255,102,104);'}]
+    else
+    	event.cancel? ? 'Cancelled' : 'Scheduled'
+    end
+   end	
+
+  g.column name: 'Cancel Reason', attribute: 'cancel_reason'
+
+  g.column  do |event|
+    link_to('Edit', edit_event_path(event))
+  end
+  
+end -%>
+

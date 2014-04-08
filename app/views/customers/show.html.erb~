@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @customer.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @customer.last_name %>
+</p>
+
+<p>
+  <strong>Nick name:</strong>
+  <%= @customer.nick_name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @customer.gender %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @customer.address %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @customer.phone_number %>
+</p>
+
+<p>
+  <strong>Email address:</strong>
+  <%= @customer.email_address %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @customer.balance %>
+</p>
+
+<p>
+  <strong>Gender pref:</strong>
+  <%= @customer.gender_pref %>
+</p>
+
+<h2>Events</h2>
+	<% @events.each do |event| %>
+  <p>
+    <%= link_to(Service.find_by_id(event.service_id).name, event_path(event.service_id)) %> on  <%= event.starts_at  %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to('New Session', controller: "events", action: 'new', customer_id: @customer.id) %>|
+<%= link_to 'Back', customers_path %>

@@ -1,0 +1,36 @@
+class Event < ActiveRecord::Base
+
+  belongs_to :customer
+  belongs_to :location
+  belongs_to :room
+  belongs_to :service
+  belongs_to :therapist
+  validates :customer_id, presence: true  
+  validates :location_id, presence: true
+  validates :therapist_id, presence: true
+  validates :room_id, presence: true
+  validates :service_id, presence: true
+  validates :starts_at, presence: true
+
+  scope :between, ->(start_time, end_time) { where("? < starts_at < ?", Event.format_date(start_time), Event.format_date(end_time) ) }
+
+  # need to override the json view to return what full_calendar is expecting.
+  # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :title => Service.find_by_id(self.service_id).name + ': ' + Customer.find_by_id(self.customer_id).last_name,
+      :description => (Customer.find_by_id(self.customer_id).first_name),
+      :start => starts_at,
+      :end => stops_at,
+      :eventTextColor => "#fff",
+      :url => Rails.application.routes.url_helpers.event_path(id),
+      #:color => "red"
+    }
+  end
+
+  def self.format_date(date_time)
+    Time.at(date_time.to_i).to_formatted_s(:db)
+  end
+
+end

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @therapist.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @therapist.last_name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @therapist.address %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @therapist.phone_number %>
+</p>
+
+<p>
+  <strong>Email address:</strong>
+  <%= @therapist.email_address %>
+</p>
+
+<p>
+  <strong>Therapist type:</strong>
+  <%= @therapist.therapist_type %>
+</p>
+
+<p>
+  <strong>Ssn:</strong>
+  <%= @therapist.ssn %>
+</p>
+
+<p>
+  <strong>Nick name:</strong>
+  <%= @therapist.nick_name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @therapist.gender %>
+</p>
+
+<%= link_to 'Edit', edit_therapist_path(@therapist) %> |
+<%= link_to 'Back', therapists_path %>

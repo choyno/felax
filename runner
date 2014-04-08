@@ -1,0 +1,8 @@
+!/bin/bash
+
+rails generate scaffold Therapist first_name:string last_name:string address:text phone_number:string email_address:string therapist_type:string ssn:string nick_name:string gender:string
+rails generate scaffold Customer first_name:string last_name:string nick_name:string gender:string address:text phone_number:string email_address:string balance:integer gender_pref:string
+rails generate scaffold Location name:string address:text phone_number:string
+rails generate scaffold Service name:string description:text time_length:integer commission:integer room_type:string
+rails g scaffold Room typer:string name:integer location_id:integer
+rails generate scaffold Event customer_id:integer therapist_id:integer location_id:integer service_id:integer walkin:boolean cancel:boolean cancel_reason:text room_id:integer starts_at:datetime stops_at:datetime

@@ -1,0 +1,30 @@
+<h1>Listing customers</h1>
+
+
+<%= grid(@customers_grid) do |g|
+
+  g.column name: 'Name', attribute: 'first_name' do |customer|
+    link_to(customer.first_name + ' ' + customer.last_name, customer)
+   end
+  
+  g.column name: 'Nick Name', attribute: 'nick_name'
+
+  g.column name: 'Phone Number', attribute: 'phone_number'
+
+  g.column name: 'Email Address', attribute: 'email_address'
+
+  g.column name: 'Balance', attribute: 'balance' 
+
+  g.column name: 'Address', attribute: 'address' 
+
+  g.column name: 'Gender', attribute: 'gender' 
+
+  g.column name: 'Gender Pref', attribute: 'gender_pref' 
+
+  g.column do |customer|
+    link_to('Edit', edit_customer_path(customer))
+    link_to('New Session', controller: "events", action: 'new', customer_id: customer.id)
+  end
+end -%>
+
+<%= link_to 'New Customer', new_customer_path %>
