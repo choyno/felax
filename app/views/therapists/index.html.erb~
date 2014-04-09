@@ -25,7 +25,7 @@
         <td><%= therapist.last_name %></td>
         <td><%= therapist.address %></td>
         <td><%= therapist.phone_number %></td>
-        <td><%= therapist.email %></td>
+        <td><%= therapist.email_address %></td>
         <td><%= therapist.therapist_type %></td>
         <td><%= therapist.ssn %></td>
         <td><%= therapist.nick_name %></td>

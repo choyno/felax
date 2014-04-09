@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403183944) do
+ActiveRecord::Schema.define(version: 20140409021543) do
 
   create_table "customers", force: true do |t|
     t.string   "first_name"
@@ -20,12 +20,24 @@ ActiveRecord::Schema.define(version: 20140403183944) do
     t.string   "gender"
     t.text     "address"
     t.string   "phone_number"
-    t.string   "email_address"
     t.integer  "balance"
     t.string   "gender_pref"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
+  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
 
   create_table "events", force: true do |t|
     t.integer  "customer_id"
@@ -73,13 +85,25 @@ ActiveRecord::Schema.define(version: 20140403183944) do
     t.string   "last_name"
     t.text     "address"
     t.string   "phone_number"
-    t.string   "email_address"
     t.string   "therapist_type"
     t.string   "ssn"
     t.string   "nick_name"
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "therapists", ["email"], name: "index_therapists_on_email", unique: true, using: :btree
+  add_index "therapists", ["reset_password_token"], name: "index_therapists_on_reset_password_token", unique: true, using: :btree
 
 end

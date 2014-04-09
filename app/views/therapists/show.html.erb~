@@ -22,7 +22,7 @@
 
 <p>
   <strong>Email address:</strong>
-  <%= @therapist.email %>
+  <%= @therapist.email_address %>
 </p>
 
 <p>

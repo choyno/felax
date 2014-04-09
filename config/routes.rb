@@ -1,5 +1,7 @@
 Felax::Application.routes.draw do
 
+  devise_for :therapists
+  devise_for :customers
   resource :calendar, :only => [:show]
 
   resources :events

@@ -5,6 +5,7 @@ class CreateTherapists < ActiveRecord::Migration
       t.string :last_name
       t.text :address
       t.string :phone_number
+      t.string :email_address
       t.string :therapist_type
       t.string :ssn
       t.string :nick_name

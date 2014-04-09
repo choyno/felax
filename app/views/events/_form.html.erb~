@@ -13,8 +13,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :customer_id %><br>
-    <%= f.collection_select :customer_id, Customer.order(:last_name),:id,:last_name, include_blank: true, :input_html => {:value => "", :id => "customer_last_name"} %>  </div>
+    <strong> Customer Name </strong><br>
+    <%= f.hidden_field :customer_id, :value => params[:customer_id] %>
+    <%= @customer.first_name %>
+  </div>
+
   <div class="field">
     <%= f.label :therapist_id %><br>
     <%= f.collection_select :therapist_id, Therapist.order(:nick_name),:id,:nick_name, include_blank: true %>

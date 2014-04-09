@@ -23,6 +23,9 @@
 
   g.column do |customer|
     link_to('Edit', edit_customer_path(customer))
+  end
+
+  g.column do |customer|
     link_to('New Session', controller: "events", action: 'new', customer_id: customer.id)
   end
 end -%>

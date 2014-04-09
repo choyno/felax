@@ -14,8 +14,8 @@
 
   <div class="field">
     <strong> Customer Name </strong><br>
-    <%= Customer.find_by_id(params[:customer_id]).first_name %>  
-    <%= Customer.find_by_id(params[:customer_id]).last_name %>  
+    <%= f.hidden_field :customer_id, :value => @customer.id %>
+    <%= @customer.first_name %>
   </div>
 
   <div class="field">

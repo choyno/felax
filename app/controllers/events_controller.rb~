@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :find_customer, only: [:new, :edit]
 
   # GET /events
   # GET /events.json
@@ -7,7 +8,6 @@ class EventsController < ApplicationController
     @events_grid = initialize_grid(Event, include: [:customer, :therapist, :location, :room, :service], order: 'events.starts_at')
     @events = Event.all
     @events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])
-    print "the length is ____++++___", @events.length
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @events }
@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @event }
@@ -27,18 +26,24 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    if params[:customer_id]
+    	@event = Event.new(:customer_id => params[:customer_id])
+    else
+        @event = Event.new
+    end
   end
 
   # GET /events/1/edit
   def edit
+    print "++++++++++++++++ Customer Id = ", @event.customer_id	
+    @customer = Customer.find_by_id(@event.customer_id)	
   end
 
   # POST /events
   # POST /events.json
   def create
-    print "I am now in Create ++++++++++++++++"
     @event = Event.new(event_params)	
+    # Set the stop time at the start time + length of service
     @event.stops_at = @event.starts_at + Service.find_by_id(@event.service_id).time_length.minutes
     respond_to do |format|
       if @event.save
@@ -54,8 +59,8 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    print "I am now in Update ==============="
-    respond_to do |format|
+      @customer = Customer.find_by_id(@event.customer_id)	
+      respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
@@ -78,6 +83,14 @@ class EventsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+  def find_customer
+    if params[:customer_id]
+      print "I made it heree ))))))))))))))))))))))))))))"
+      @customer = Customer.find_by_id(params[:customer_id])
+    end
+  end
+
     def set_event
       @event = Event.find(params[:id])
     end
